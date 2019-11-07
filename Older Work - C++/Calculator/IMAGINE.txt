@@ -1,0 +1,277 @@
+MAIN.CCP
+
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <string>
+#include "imagine.h"
+#include "complex.h"
+//YOU: include the file for complex numbers
+//Foo
+using namespace std;
+
+int main() {
+	cout << boolalpha; //Uncomment this line and see what happens
+	while (true) {
+		//YOU: Read in a complex number
+		while (cin) {
+			int inC, inI, inC2, inI2, exp;
+			string smoothOPR = " ";
+			Imaginary blank(0), tempI(0), tempI2(0);
+			Complex tempR(0, tempI), tempR2(0, tempI2), result(0, blank), outputR(0, blank), RxR(0, blank);
+
+			cout << "Enter a complex number as a pair of signed integers:\n";
+			cin >> tempR >> smoothOPR;
+			if (smoothOPR == "^") {
+				cin >> exp;
+			}
+			else
+				cin >> tempR2;
+
+			tempI = tempR.get_imagine();
+			tempI2 = tempR2.get_imagine();
+
+			//DEBUG: cout << tempR << " " << tempR2 << endl;
+
+			/*if (cin) {
+				cin.clear();
+				string junk_str;
+				cin >> junk_str;
+			}*/
+
+
+			/*
+			//YOU: Read in an operator (+,-,*,==,or ^)
+			//cout << "Enter the operator you would like to perform:\n";
+
+
+			//YOU: Read in the second operator (another complex or an int) */
+
+			//YOU: Output the result
+			if (smoothOPR == "+") {
+				Imaginary outputI = (tempI + tempI2);
+				result = (tempR + tempR2);
+				cout << result.get_real() << outputI << endl;
+			}
+			if (smoothOPR == "-") {
+				Imaginary outputI = (tempI - tempI2);
+				result = (tempR - tempR2);
+				cout << result.get_real() << outputI << endl;
+			}
+			if (smoothOPR == "*") {
+				Imaginary IxI = (tempI * tempI2);
+				RxR = (tempR * tempR2);
+				int RxI = tempR.get_real() * tempI2.get_coeff();
+				int IxR = tempI.get_coeff() * tempR2.get_real();
+
+				int realOutput = ((IxI.get_coeff() * -1) + (RxR.get_real()));
+				int imaginaryOutput = (RxI + IxR);
+				Imaginary outputI(imaginaryOutput);
+
+				cout << realOutput << outputI << endl;
+			}
+			if (smoothOPR == "^") {
+				if (exp == 0) { cout << 1; }
+				else {
+					outputR = tempR ^ exp;
+					cout << outputR << endl;
+				}
+			}
+			if (smoothOPR == "==") {
+				if ((tempR == tempR2) && (tempI == tempI2)) {
+					cout << "true\n";
+				}
+				else
+					cout << "false\n";
+			}
+		}
+
+	}
+		system("PAUSE");
+		return 0;
+
+}
+
+
+
+
+
+
+COMPLEX.H
+
+#pragma once
+#include <iostream>
+#include "imagine.h"
+
+using namespace std;
+
+class Complex {
+private:
+	int real;
+	Imaginary imagine;
+public:
+	//YOU: Implement all these functions
+	Complex(); //Default constructor
+	Complex(int new_real, Imaginary new_imagine); //Two parameter constructor
+	int get_real () const { return real; }
+	Imaginary get_imagine() const { return imagine; }
+	void set_real(int IN) { real = IN; }
+	Complex operator+(const Complex &rhs);
+	Complex operator-(const Complex &rhs);
+	Complex operator*(const Complex &rhs);
+	bool    operator==(const Complex &rhs);
+	Complex operator^(const int &exponent);
+	friend ostream& operator<<(ostream &lhs, const Complex& rhs);
+	friend istream& operator>>(istream &lhs, Complex& rhs);
+};
+//Class definition file for Complex
+
+//YOU: Fill in all of these functions
+//There are stubs (fake functions) in there now so that it will compile
+//The stubs should be removed and replaced with your own code.
+
+Complex::Complex() {
+}
+
+Complex::Complex(int new_real, Imaginary new_imagine) {
+	real = new_real;
+	imagine = new_imagine;
+}
+
+Complex Complex::operator+(const Complex &rhs) {
+	Complex result;
+	result.real = real + rhs.real;
+	return result;
+}
+
+Complex Complex::operator-(const Complex &rhs) {
+	Complex result;
+	result.real = real - rhs.real;
+	return result;
+}
+
+Complex Complex::operator*(const Complex &rhs) {
+	Complex result;
+	result.real = real * rhs.real;
+	return result;
+}
+
+bool Complex::operator==(const Complex &rhs) {
+	if ((real == rhs.real) && (imagine == rhs.imagine)) { 
+		return true; }
+	
+	else
+	return false;
+}
+
+Complex Complex::operator^(const int &exponent) {
+	Complex unstable (real, imagine);
+
+	for (int i = 1; i < exponent; i++) {
+		Imaginary IxI = (unstable.imagine * imagine);
+		int RxR = (real * unstable.real);
+		int RxI = (unstable.real * imagine.get_coeff());
+		int IxR = (unstable.imagine.get_coeff() * real);
+
+		int outputR = ((IxI.get_coeff() * -1) + RxR);
+		int outputI = (RxI + IxR);
+		unstable.real = outputR;
+		unstable.imagine.set_coeff(outputI);
+	}
+		
+		Complex result (unstable.real, unstable.imagine);
+
+		return result;
+}
+
+ostream& operator<<(ostream &lhs, const Complex& rhs) {
+	lhs << rhs.real;		//Will echo +4i or +0i or -3i or whatever
+	lhs << noshowpos;
+	lhs << showpos;
+	lhs << rhs.imagine;
+	return lhs;
+}
+
+istream& operator>>(istream &lhs, Complex& rhs) {
+	int placeholder;
+	lhs >> rhs.real >> placeholder;
+	Imaginary imagine = placeholder;
+	rhs.imagine = imagine;
+		if (rhs.real == 0 && placeholder == 0) { exit(EXIT_SUCCESS); }
+	return lhs;
+}
+
+
+
+
+
+
+
+IMAGINE.H 
+
+
+
+#pragma once
+#include <iostream>
+using namespace std;
+
+class Imaginary {
+private:
+	int coeff; //If 5, then means 5i
+public:
+	Imaginary() { coeff = 0; }
+	Imaginary(int new_coeff) { coeff = new_coeff; }
+	int get_coeff() const { return coeff; }
+	void set_coeff(int IN) { coeff = IN; }
+	Imaginary operator+(const Imaginary& rhs);
+	Imaginary operator-(const Imaginary& rhs);
+	int       operator*(const Imaginary& rhs);
+	Imaginary operator*(const int& rhs);
+	Imaginary operator=(const int& rhs);
+	bool      operator==(const Imaginary& rhs);
+	friend ostream& operator<<(ostream& lhs, const Imaginary& rhs);
+};
+Imaginary Imaginary::operator+(const Imaginary& rhs) {
+	Imaginary result;
+	result.coeff = coeff + rhs.coeff;
+	return result;
+	return rhs; //5i + 3i = 8i
+}
+
+Imaginary Imaginary::operator-(const Imaginary& rhs) {
+	Imaginary result;
+	result.coeff = coeff - rhs.coeff;
+	return result; //5i - 3i = 2i
+}
+
+Imaginary Imaginary::operator*(const int& rhs) {
+	Imaginary result;
+	result.coeff = coeff * rhs;
+	if (result.coeff < 0) { result.coeff * -1; }
+	return result; //5i * 2 = 10i
+}
+
+int Imaginary::operator*(const Imaginary& rhs) {
+	unsigned int result = 0;
+	result = (coeff * rhs.coeff);
+	return result; //i * i = -1
+}
+
+Imaginary Imaginary::operator=(const int& rhs) {
+	return Imaginary(rhs); //This works fine
+}
+
+bool Imaginary::operator==(const Imaginary& rhs) {
+	if (coeff = rhs.coeff) { return true; }
+	
+	else
+
+	return (false);
+}
+
+ostream& operator<<(ostream& lhs, const Imaginary& rhs) {
+	lhs << showpos;
+	lhs << rhs.coeff << "i"; //Will echo +4i or +0i or -3i or whatever
+	lhs << noshowpos;
+	return lhs;
+}

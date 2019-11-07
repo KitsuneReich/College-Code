@@ -1,0 +1,137 @@
+#include <iostream>
+#include "list.h"
+using namespace std;
+
+//YOU: Write these four functions
+//Make sure you handle empty Lists cleanly!
+
+//Deletes the oldest Node inserted, and returns its data value
+//The oldest Node inserted should be tail_ptr
+int List::pop() {
+	if (list_size == 0) {
+		return 0;
+	}
+	if (list_size == 1) {
+		int nodeData = tail_ptr->get_data();
+		delete tail_ptr;
+		head_ptr = NULL;
+		tail_ptr = NULL;
+		list_size--;
+
+		return nodeData;
+	}
+	Node *it = head_ptr;
+	Node *tonari = it->get_next();
+	while (tonari->get_next() != NULL) {
+		it = tonari;
+		tonari = it->get_next();
+	}
+	int nodeData = tail_ptr->get_data();
+	delete tonari;
+	it->set_next(NULL);
+	tail_ptr = it;
+	tail_ptr->set_data(it->get_data());
+
+	list_size--;
+	return nodeData;
+}
+
+//Adds a new Node to the end of the list
+//The newest Node will be held in head_ptr
+void List::push(int new_data) {
+	if (list_size == 0) {
+		//tail_ptr = head_ptr; 
+		head_ptr = new Node;
+		head_ptr->set_data(new_data);
+		list_size++;
+		return;
+	}
+	
+	if (list_size == 1) {
+		tail_ptr = head_ptr;
+		head_ptr = new Node;
+		head_ptr->set_data(new_data);
+		head_ptr->set_next(tail_ptr);
+
+		list_size++;
+		return;
+	}
+	Node *temp_ptr = head_ptr;
+	head_ptr = new Node;
+	head_ptr->set_data(new_data);
+	head_ptr->set_next(temp_ptr);
+	
+	list_size++;
+	return;
+}
+
+//Returns if a Node containing the passed-in integer is in the list
+//True if such a Node exists, false otherwise
+bool List::search(int test_data) {
+	if (list_size == 0) {
+		return false;
+	}
+
+	Node *it = head_ptr;
+	while (it->get_next() != NULL) {
+		if (it->get_data() == test_data)
+			return true;
+		Node *tonari = it->get_next();
+		it = tonari;
+	}
+	if (it->get_next() == NULL)
+		if (it->get_data() == test_data)
+			return true;
+		else 
+			return false;
+}
+
+//Removes the newest node containing the passed in integer
+//Only remove one Node. Not all of them.
+//Return true if any elements removed, false otherwise
+bool List::remove(int old_data) {
+	if (list_size == 0) {
+		return false;
+	}
+
+	else {
+		Node *it = head_ptr;
+		if (head_ptr->get_data() == old_data) {
+			Node *tonari = it->get_next();
+			head_ptr = tonari;
+			delete it;
+
+			list_size--;
+			return true;
+		}
+		while (it->get_next() != NULL) {
+			Node *tonari = it->get_next();
+			if (tonari->get_data() == old_data) {
+				it->set_next(tonari->get_next());
+				delete tonari;
+
+				list_size--;
+				return true;
+			}
+			it = tonari;
+		}
+		if (tail_ptr->get_data() == old_data) {
+			Node *it = head_ptr;
+			Node *tonari = it->get_next();
+			while (tonari->get_next() != NULL) {
+				it = tonari;
+				tonari = it->get_next();
+			}
+			delete tonari;
+			//it->set_next(NULL);
+			tail_ptr = it;
+			tail_ptr->set_next(NULL);
+			tail_ptr->set_data(it->get_data());
+			
+			list_size--;
+			return true;
+		}
+		else
+			return false;
+		}
+}

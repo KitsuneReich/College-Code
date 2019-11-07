@@ -1,0 +1,184 @@
+include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include "imaginary.h"
+#include "complex.h"
+//YOU: include the file for complex numbers
+//Foo
+using namespace std;
+
+int main() {
+    cout << boolalpha; //Uncomment this line and see what happens
+    while (true) {
+        //YOU: Read in a complex number
+        int inC, inI;
+
+        cout << "Enter a complex number as a pair of signed integers:\n";
+        cin >> inC >> inI >> endl;
+            if (cin) {
+                if (inC == 0 && inI == 0) {exit(EXIT_SUCCESS);}
+                else {
+                    cin.clear ();
+                    string junk_str;
+                    cin >> junk_str;}
+                    }
+            Imaginary tempI (inI);
+            Complex tempR (inC, tempI);
+
+        //YOU: Read in an operator (+,-,*,==,or ^)
+        cout << "Enter the operator you would like to perform:\n";
+
+        //YOU: Read in the second operator (another complex or an int)
+
+        //YOU: Output the result
+        cout << "The number you entered was " << tempR << " " << tempI<< "i\n";
+    }
+    system ("PAUSE");
+    return 0;
+}
+
+
+#include <iostream>
+#include "complex.h"
+using namespace std;
+
+//Class definition file for Complex
+
+//YOU: Fill in all of these functions
+//There are stubs (fake functions) in there now so that it will compile
+//The stubs should be removed and replaced with your own code.
+
+Complex::Complex() {
+}
+
+Complex::Complex(int new_real, Imaginary new_imagine) {
+    real = new_real;
+    new_imagine = imagine;
+}
+
+Complex Complex::operator+(const Complex &rhs) {
+    return Complex(0,0);
+}
+
+Complex Complex::operator-(const Complex &rhs) {
+    return Complex(0,0);
+}
+
+Complex Complex::operator*(const Complex &rhs) {
+    return Complex(0,0);
+}
+
+bool Complex::operator==(const Complex &rhs) {
+    return false;
+}
+
+Complex Complex::operator^(const int &exponent) {
+    return Complex(0,0);
+}
+
+ostream& operator<<(ostream &lhs,const Complex& rhs) {
+    lhs << "Hello World!\n";
+    return lhs;
+}
+
+istream& operator>>(istream &lhs,Complex& rhs) {
+    rhs.real = 0;
+    rhs.imagine = 0;
+    return lhs;
+}
+
+
+
+#include "imaginary.h"
+#include <iomanip>
+using namespace std;
+
+Imaginary Imaginary::operator+(const Imaginary& rhs) {
+    return Imaginary(0); //5i + 3i = 8i
+}
+
+Imaginary Imaginary::operator-(const Imaginary& rhs) {
+    return Imaginary(0); //5i - 3i = 2i
+}
+
+Imaginary Imaginary::operator*(const int& rhs) {
+    return Imaginary(0); //5i * 2 = 10i
+}
+
+int Imaginary::operator*(const Imaginary& rhs) {
+    return 0; //i * i = -1
+}
+
+Imaginary Imaginary::operator=(const int& rhs) {
+    return Imaginary(rhs); //This works fine
+}
+
+bool Imaginary::operator==(const Imaginary& rhs) {
+    return (true);
+}
+
+ostream& operator<<(ostream& lhs, const Imaginary& rhs) {
+    lhs << showpos;
+    lhs << rhs.coeff << "i"; //Will echo +4i or +0i or -3i or whatever
+    lhs << noshowpos;
+    return lhs;
+}
+
+
+
+
+
+
+#pragma once
+#include <iostream>
+using namespace std;
+
+class Imaginary {
+    private:
+        int coeff; //If 5, then means 5i
+    public:
+        Imaginary() { coeff = 0; }
+        Imaginary(int new_coeff) { coeff = new_coeff; }
+        int get_coeff() const { return coeff; }
+        Imaginary operator+(const Imaginary& rhs);
+        Imaginary operator-(const Imaginary& rhs);
+        int       operator*(const Imaginary& rhs);
+        Imaginary operator*(const int& rhs);
+        Imaginary operator=(const int& rhs);
+        bool      operator==(const Imaginary& rhs);
+        friend ostream& operator<<(ostream& lhs, const Imaginary& rhs);
+};
+
+
+
+
+
+
+
+
+#pragma once
+#include <iostream>
+#include "imaginary.h"
+using namespace std;
+
+class Complex {
+    private:
+        int real;
+        Imaginary imagine;
+    public:
+        //YOU: Implement all these functions
+        Complex(); //Default constructor
+        Complex(int new_real, Imaginary new_imagine); //Two parameter constructor
+        Complex operator+(const Complex &rhs);
+        Complex operator-(const Complex &rhs);
+        Complex operator*(const Complex &rhs);
+        bool    operator==(const Complex &rhs);
+        Complex operator^(const int &exponent);
+        friend ostream& operator<<(ostream &lhs,const Complex& rhs);
+        friend istream& operator>>(istream &lhs,Complex& rhs);
+};
+
+
+
+
+

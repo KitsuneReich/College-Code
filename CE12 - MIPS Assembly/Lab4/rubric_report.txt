@@ -1,0 +1,9 @@
+6 - Lab4.asm assembles without errors
+3 - Lab4.asm assembles and behaves for input 2000,2005
+3 - Lab4.asm assembles and behaves for input 1200,1800
+1 - Lab4.asm includes comment on register usage
+0 - Lab4.asm instructions, operands, and comments are lined up in columns
+2 - Lab4.asm header contains name, cruzid, date, lab name, course name, quarter, school, and program description
+1 - Lab4.asm has useful and sufficient comments
+1 - README.txt header has lab name, course name, student name, cruzid
+2 - README.txt contains complete sentence responses to 4 questions

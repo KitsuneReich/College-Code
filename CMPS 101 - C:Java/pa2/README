@@ -1,0 +1,9 @@
+
+//Nichole Boothroyd    cruzID: nboothro  Assignment: pa2
+
+Lex.c           Client program using the List ADT
+List.c          Implementation file for List ADT
+List.h          Header file for List ADT
+ListClient.c    Client program to debug List.c
+Makefile        Provided makefile from class webpage
+README          Documentation file

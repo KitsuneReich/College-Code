@@ -1,0 +1,183 @@
+//Nichole Boothroyd
+#include <iostream>
+#include <cstdlib>
+#include <cctype>
+#include <cmath>
+#include <vector>
+using namespace std;
+
+void die() {
+    cout << "BAD INPUT\n";
+    exit(EXIT_FAILURE);
+}
+
+template <class T>
+class Stack {
+    private:
+        int index;
+        vector<T> data;
+    public:
+        Stack (){index = 0;}
+        void push(T);
+        void pop();
+        void print();
+        void add();
+        void sub();
+        void mul();
+        void div();
+        void mod();
+        void exp();
+};
+
+int main() {
+    int operand;
+    char operat;
+    bool seen_an_e = false;
+    Stack<int> my_stack;
+
+    while (cin) {
+        cin >> ws; //Eat whitespace
+        int c = cin.peek(); //Peek at next letter to read
+        if (c == EOF) break;
+        if (!isdigit(c)) { //Should be +,-,*,/,%,^,E
+            cin >> operat;
+
+            if (operat == '+')
+                my_stack.add();
+
+            else if (operat == '-')
+                my_stack.sub();
+
+            else if (operat == '*')
+                my_stack.mul();
+
+            else if (operat == '/')
+                my_stack.div();
+ 	    else if (operat == '%')
+                my_stack.mod();
+
+            else if (operat == '^')
+                my_stack.exp();
+
+            else if (operat == 'E'){
+                seen_an_e = true;
+                my_stack.print();
+            }
+            else if (operat != '+' || '-' || '*' || '/' || '%' || '^' || 'E')
+                die();
+
+        } else { //isdigit(c)
+            cin >> operand;
+            my_stack.push(operand);
+        }
+    }
+    //Once we get here, we're at the end of the file
+    //Do some final checks
+    //YOU: Code this section
+    if (!seen_an_e)
+        die();
+}
+template <typename T> void Stack<T>::push(T new_data) {
+    data.push_back(new_data);
+    index++;
+}
+
+template <typename T> void Stack<T>::pop() {
+    if (data.size() <= 0) { die(); }
+
+    data.pop_back();
+    index--;
+
+}
+
+template <typename T> void Stack<T>::print() {
+    if (data.size() >  1 || data.size() == 0) {
+        //  cout << "From print function " << endl;
+        die(); }
+    else {
+        cout << data.back() << endl;
+    }
+}
+
+template <typename T> void Stack<T>::add() {
+    if (data.size() < 2) { die(); }
+    else {
+        int rhs = data.back();
+        this->pop();
+        int lhs = data.back();
+        this->pop();
+
+        data.push_back(lhs + rhs);
+        //  cout << data.back() << endl;
+    }
+}
+
+template <typename T> void Stack<T>::sub() {
+    if (data.size() < 2) { die(); }
+    else {
+        int rhs = data.back();
+        this->pop();
+        int lhs = data.back();
+        this->pop();
+
+        data.push_back(lhs - rhs);
+        //  cout << data.back() << endl;
+    }
+}
+
+template <typename T> void Stack<T>::mul() {
+    if (data.size() < 2) { die(); }
+    else {
+        int rhs = data.back();
+        this->pop();
+        int lhs = data.back();
+        this->pop();
+
+        data.push_back(lhs * rhs);
+        //  cout << data.back() << endl;
+    }
+}
+
+
+template <typename T> void Stack<T>::div() {
+    if (data.size() < 2) { die(); }
+    else {
+        int rhs = data.back();
+        if (rhs == 0) { die(); }
+        this->pop();
+        int lhs = data.back();
+        this->pop();
+
+        data.push_back(lhs / rhs);
+        //  cout << data.back() << endl;
+    }
+}
+
+template <typename T> void Stack<T>::mod() {
+    if (data.size() < 2) { die(); }
+    else {
+        int rhs = data.back();
+        if (rhs == 0) { die(); }
+        this->pop();
+        int lhs = data.back();
+        this->pop();
+
+        data.push_back(lhs % rhs);
+        //  cout << data.back() << endl;
+    }
+}
+
+template <typename T> void Stack<T>::exp() {
+    if (data.size() < 2) { die(); }
+    else {
+        int rhs = data.back();
+        this->pop();
+        int lhs = data.back();
+        this->pop();
+
+        int powWow = pow(lhs, rhs);
+
+        data.push_back(powWow);
+        //  cout << data.back() << endl;
+    }
+}

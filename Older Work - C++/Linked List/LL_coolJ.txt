@@ -1,0 +1,246 @@
+list.cpp
+
+
+#include <iostream>
+#include "list.h"
+using namespace std;
+
+//YOU: Write these four functions
+//Make sure you handle empty Lists cleanly!
+
+//Deletes the oldest Node inserted, and returns its data value
+//The oldest Node inserted should be tail_ptr
+int List::pop() {
+	if (list_size == 0) {
+		return 0;
+	}
+	if (list_size == 1) {
+		int nodeData = tail_ptr->get_data();
+		delete tail_ptr;
+		head_ptr->set_next(NULL);
+		list_size--;
+
+		return nodeData;
+	}
+	Node *it = head_ptr;
+	while (it->get_next() != tail_ptr) {
+		Node *tonari = it->get_next();
+		it = tonari;
+	}
+	int nodeData = tail_ptr->get_data();
+	delete tail_ptr;
+	it->set_next(NULL);
+	tail_ptr = it;
+
+	list_size--;
+	return nodeData;
+}
+
+//Adds a new Node to the end of the list
+//The newest Node will be held in head_ptr
+void List::push(int new_data) {
+	if (list_size == 0) {
+		tail_ptr = head_ptr; 
+		head_ptr = new Node;
+		head_ptr->set_data(new_data);
+		list_size++;
+		return;
+	}
+	
+	if (list_size == 1) {
+		tail_ptr = head_ptr;
+		head_ptr = new Node;
+		head_ptr->set_data(new_data);
+		head_ptr->set_next(tail_ptr);
+
+		list_size++;
+		return;
+	}
+	Node *temp_ptr = head_ptr;
+	head_ptr = new Node;
+	head_ptr->set_data(new_data);
+	head_ptr->set_next(temp_ptr);
+	
+	list_size++;
+	return;
+}
+
+//Returns if a Node containing the passed-in integer is in the list
+//True if such a Node exists, false otherwise
+bool List::search(int test_data) {
+	if (list_size == 0) {
+		return false;
+	}
+
+	Node *it = head_ptr;
+	while (it->get_next() != NULL) {
+		if (it->get_data() == test_data)
+			return true;
+		Node *tonari = it->get_next();
+		it = tonari;
+	}
+	if (it->get_next() == NULL)
+		if (it->get_data() == test_data)
+		return true;
+		else 
+			return false;
+}
+
+//Removes the newest node containing the passed in integer
+//Only remove one Node. Not all of them.
+//Return true if any elements removed, false otherwise
+bool List::remove(int old_data) {
+	if (list_size == 0) {
+		return false;
+	}
+
+	else {
+		Node *it = head_ptr; 
+		if (head_ptr->get_data() == old_data) {
+			Node *tonari = it->get_next();
+			head_ptr = tonari;
+			delete it;
+
+			list_size--;
+			return true;
+		}
+		while (it->get_next() != NULL) {
+			Node *tonari = it->get_next();
+			if (tonari->get_data() == old_data) {
+				it->set_next(tonari->get_next());
+				delete tonari;
+
+				list_size--;
+				return true;
+			}
+				it->set_next(tonari->get_next());
+			}
+			if (it->get_next() == NULL)
+				return false;
+		}
+}
+
+
+main.cpp
+
+
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include "list.h"
+using namespace std;
+
+void uppercaseify(string& mystr);
+
+int main() {
+	List mylist;
+	string operation;
+	int data;
+	while (cin) {
+		cin >> operation;
+		uppercaseify(operation);
+		if (!cin || cin.eof() || operation == "QUIT") {
+			exit(EXIT_SUCCESS);
+		}
+		if (operation == "STATUS") {
+			cout << mylist.get_list_size() << endl;
+		}
+		if (operation == "PRINT") {
+			mylist.print_list();
+		}
+		if (operation == "PUSH") {
+			cin >> data;
+			mylist.push(data);
+		}
+		if (operation == "POP") {
+			data = mylist.pop();
+			cout << data << endl;
+		}
+		if (operation == "SEARCH") {
+			cin >> data;
+			if (mylist.search(data))
+				cout << "IN LIST\n";
+			else
+				cout << "NOT IN LIST\n";
+		}
+		if (operation == "REMOVE") {
+			cin >> data;
+			if (mylist.remove(data))
+				cout << "REMOVED\n";
+			else
+				cout << "NOT REMOVED\n";
+		}
+	}
+	return 0;
+}
+
+void uppercaseify(string& mystr) {
+	for (auto& c : mystr)
+		c = toupper(c);
+}
+
+
+node.h
+
+#pragma once
+
+//This Node class is fully functional
+class Node {
+	int data; //Holds the data we're keeping track of
+	Node *next;
+public:
+	Node() {
+		data = 0;
+		next = NULL;
+	}
+	Node(int new_data, Node *new_next) {
+		data = new_data;
+		next = new_next;
+	}
+	int get_data() const { return data; }
+	Node *get_next() const { return next; }
+	void set_next(Node *new_next) { next = new_next; }
+	void set_data(int new_data) { data = new_data; }
+};
+
+
+list.h
+
+#pragma once
+#include <iostream>
+#include "node.h"
+using namespace std;
+
+class List {
+	int list_size;
+	Node *head_ptr; //Holds newest member
+	Node *tail_ptr; //Holds oldest member
+public:
+	List() {
+		list_size = 0;
+		head_ptr = NULL;
+		tail_ptr = NULL;
+	}
+	int get_list_size() const { return list_size; }
+
+	//Output the list
+	void print_list() {
+		if (head_ptr == NULL) {
+			cout << "EMPTY LIST\n";
+			return;
+		}
+		Node *temp_ptr = head_ptr;
+		int counter = 0;
+		while (temp_ptr) { //Same as saying while (temp_ptr != NULL)
+			cout << "Node " << counter++ << ": " << temp_ptr->get_data() << endl;
+			temp_ptr = temp_ptr->get_next();
+		}
+	}
+
+	//Write these functions
+	int pop();
+	void push(int new_data);
+	bool search(int test_data);
+	bool remove(int old_data);
+};
+

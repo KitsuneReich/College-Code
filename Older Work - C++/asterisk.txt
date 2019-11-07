@@ -1,0 +1,34 @@
+//Nichole Boothroyd - CSCI 41
+#include <iostream>
+
+using namespace std;
+
+void asterisk(int);
+
+int main() {
+asterisk(1);
+
+return 0;
+}
+
+void asterisk(int val) {
+cout << val << endl;
+    if (val < 4)
+        asterisk(val + 1);
+cout << val << endl;
+}
+
+
+
+OUTPUT:
+
+[~/asterisk] % a.out main.cc
+1
+2
+3
+4
+4
+3
+2
+1
+[~/asterisk] %

@@ -1,0 +1,15 @@
+
+//Nichole Boothroyd    cruzID: nboothro  Assignment: pa5
+
+List.c       		List ADT
+List.h			Header file for List ADT
+Graph.c			Graph ADT
+Graph.h			Header file for Graph ADT
+GraphTest.c		Test client for Graph ADT
+FindComponents.c	Client program using Graph ADT to find SCC's
+Makefile        	Provided makefile from class webpage
+README          	Documentation file
+
+Comments:
+
+FindComponents.c is not functioning properly. 

@@ -1,0 +1,246 @@
+  GNU nano 2.2.6                           File: list.h
+
+#pragma once
+#include <iostream>
+#include "node.h"
+using namespace std;
+
+class List {
+    int list_size;
+    Node *head_ptr; //Holds newest member
+    Node *tail_ptr; //Holds oldest member
+    public:
+    List() {
+        list_size = 0;
+        head_ptr = NULL;
+        tail_ptr = NULL;
+    }
+    int get_list_size() const { return list_size; }
+
+    //Output the list
+    void print_list() {
+        if (head_ptr == NULL) {
+            cout << "EMPTY LIST\n";
+            return;
+        }
+        Node *temp_ptr = head_ptr;
+        int counter = 0;
+        while (temp_ptr) { //Same as saying while (temp_ptr != NULL)
+            cout << "Node " << counter++ << ": " << temp_ptr->get_data() << endl;
+            temp_ptr = temp_ptr->get_next();
+        }
+    }
+
+    //Write these functions
+    int pop();
+    void push(int new_data);
+    bool search(int test_data);
+    bool remove (int old_data);
+};
+
+
+
+
+
+
+
+#pragma once
+
+//This Node class is fully functional
+class Node {
+    int data; //Holds the data we're keeping track of
+    Node *next;
+    Node *prev;
+    public:
+    Node() {
+        data = 0;
+        next = NULL;
+        prev = NULL;
+    }
+    Node(int new_data, Node *new_next) {
+        data = new_data;
+        next = new_next;
+        //prev = new_prev;
+    }
+    int get_data() const { return data; }
+    Node *get_next() const { return next; }
+    Node *get_prev() const {return prev; }
+    void set_next(Node *new_next) { next = new_next; }
+    void set_prev(Node *new_prev) { prev = new_prev; }
+    void set_data (int new_data) {data = new_data;}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include "list.h"
+using namespace std;
+
+void uppercaseify(string& mystr);
+
+int main() {
+    List mylist;
+    string operation;
+    int data;
+    while (cin) {
+        cin >> operation;
+        uppercaseify(operation);
+        if (!cin || cin.eof() || operation == "QUIT") {
+            exit(EXIT_SUCCESS);
+        }
+        if (operation == "STATUS") {
+            cout << mylist.get_list_size() << endl;
+        }
+        if (operation == "PRINT") {
+            mylist.print_list();
+        }
+        if (operation == "PUSH") {
+            cin >> data;
+            mylist.push(data);
+        }
+        if (operation == "POP") {
+            data = mylist.pop();
+            cout << data << endl;
+        }
+        if (operation == "SEARCH") {
+            cin >> data;
+            if (mylist.search(data))
+                cout << "IN LIST\n";
+            else
+                cout << "NOT IN LIST\n";
+        }
+        if (operation == "REMOVE") {
+            cin >> data;
+            if (mylist.remove(data))
+                cout << "REMOVED\n";
+            else
+                cout << "NOT REMOVED\n";
+        }
+    }
+    return 0;
+}
+
+void uppercaseify(string& mystr) {
+    for (auto& c: mystr)
+        c = toupper(c);
+}
+
+
+
+
+
+
+a.out: main.o list.o node.o
+    g++ -g -std=c++11 main.o list.o node.o
+
+main.o: main.cc list.h node.h
+    g++ -c -g -std=c++11 main.cc
+
+list.o: list.cc list.h node.h
+    g++ -c -g -std=c++11 list.cc
+
+node.o: node.cc node.h
+    g++ -c -g -std=c++11 node.cc
+
+clean:
+    rm -f *.o core a.out
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+#include "list.h"
+using namespace std;
+
+//YOU: Write these four functions
+//Make sure you handle empty Lists cleanly!
+
+//Deletes the oldest Node inserted, and returns its data value
+//The oldest Node inserted should be tail_ptr
+int List::pop() {
+    if (list_size == 0) {
+        return 0;
+    }
+    if (list_size == 1) {
+        int nodeData = head_ptr->get_data();
+        delete head_ptr;
+        head_ptr = NULL;
+        tail_ptr = NULL;
+
+        list_size--;
+        return nodeData;
+    }
+    int nodeData = tail_ptr->get_data();
+    Node *temp = tail_ptr->get_prev();
+    temp->set_next(NULL);
+    delete tail_ptr;
+    tail_ptr = temp;
+
+    list_size--;
+    return nodeData;
+}
+
+//Adds a new Node to the end of the list
+//The newest Node will be held in head_ptr
+void List::push(int new_data) {
+    Node *new_ptr = new Node(new_data, head_ptr);
+    if (list_size > 0){
+        head_ptr->set_prev(new_ptr);
+    }
+    head_ptr = new_ptr;
+    head_ptr->set_prev(NULL);
+    if (list_size == 0){
+        tail_ptr = head_ptr;
+    }
+    list_size++;
+    return;
+}
+
+

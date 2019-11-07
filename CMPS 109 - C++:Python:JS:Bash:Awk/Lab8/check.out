@@ -1,0 +1,196 @@
+Numbers: 1,000 Lists: 1 Cores: 12 Resends: FALSE Lasts: FALSE
+Generating 1,000 random numbers... 
+Generating expected results... 
+Generate time: 0.0055183 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+Elapsed time: 0.006488 seconds
+Comparing results... 
+List 0 PASS
+Numbers: 1,000 Lists: 1 Cores: 12 Resends: FALSE Lasts: FALSE
+Generating 1,000 random numbers... 
+Generating expected results... 
+Generate time: 0.006518 seconds
+CruzID: nboothro
+Running STUDENT  RadixServer on port 11151 with 12 cores
+Running INTERNAL RadixClient
+Elapsed time: 0.210773 seconds
+Comparing results... 
+List 0 PASS
+Numbers: 1,000 Lists: 2 Cores: 12 Resends: FALSE Lasts: FALSE
+Generating 2,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00580662 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+Elapsed time: 0.012544 seconds
+Comparing results... 
+List 0 PASS
+List 1 PASS
+Numbers: 1,000 Lists: 2 Cores: 12 Resends: FALSE Lasts: FALSE
+Generating 2,000 random numbers... 
+Generating expected results... 
+Generate time: 0.004197 seconds
+CruzID: nboothro
+Running STUDENT  RadixServer on port 11151 with 12 cores
+Running INTERNAL RadixClient
+Elapsed time: 0.424369 seconds
+Comparing results... 
+List 0 PASS
+List 1 PASS
+Numbers: 1,000 Lists: 4 Cores: 12 Resends: FALSE Lasts: FALSE
+Generating 4,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00990243 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+Elapsed time: 0.019473 seconds
+Comparing results... 
+List 0 PASS
+List 1 PASS
+List 2 PASS
+List 3 PASS
+Numbers: 1,000 Lists: 4 Cores: 12 Resends: FALSE Lasts: FALSE
+Generating 4,000 random numbers... 
+Generating expected results... 
+Generate time: 0.007623 seconds
+CruzID: nboothro
+Running STUDENT  RadixServer on port 11151 with 12 cores
+Running INTERNAL RadixClient
+Elapsed time: 0.842008 seconds
+Comparing results... 
+List 0 PASS
+List 1 PASS
+List 2 PASS
+List 3 PASS
+
+               Basic:   14/14   100.0%
+
+Numbers: 1,000 Lists: 1 Cores: 12 Resends: TRUE Lasts: FALSE
+Generating 1,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00622914 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+Elapsed time: 0.006208 seconds
+Comparing results... 
+List 0 FAIL
+Numbers: 1,000 Lists: 1 Cores: 12 Resends: TRUE Lasts: FALSE
+Generating 1,000 random numbers... 
+Generating expected results... 
+Generate time: 0.006797 seconds
+CruzID: nboothro
+Running STUDENT  RadixServer on port 11151 with 12 cores
+Running INTERNAL RadixClient
+Elapsed time: 0.210734 seconds
+Comparing results... 
+List 0 FAIL
+Numbers: 1,000 Lists: 2 Cores: 12 Resends: TRUE Lasts: FALSE
+Generating 2,000 random numbers... 
+Generating expected results... 
+Generate time: 0.0060254 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+Elapsed time: 0.012159 seconds
+Comparing results... 
+List 0 FAIL
+List 1 PASS
+Numbers: 1,000 Lists: 2 Cores: 12 Resends: TRUE Lasts: FALSE
+Generating 2,000 random numbers... 
+Generating expected results... 
+Generate time: 0.009714 seconds
+CruzID: nboothro
+Running STUDENT  RadixServer on port 11151 with 12 cores
+Running INTERNAL RadixClient
+Elapsed time: 0.421233 seconds
+Comparing results... 
+List 0 FAIL
+List 1 PASS
+Numbers: 1,000 Lists: 4 Cores: 12 Resends: TRUE Lasts: FALSE
+Generating 4,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00970754 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+Elapsed time: 0.025951 seconds
+Comparing results... 
+List 0 FAIL
+List 1 PASS
+List 2 PASS
+List 3 PASS
+Numbers: 1,000 Lists: 4 Cores: 12 Resends: TRUE Lasts: FALSE
+Generating 4,000 random numbers... 
+Generating expected results... 
+Generate time: 0.005704 seconds
+CruzID: nboothro
+Running STUDENT  RadixServer on port 11151 with 12 cores
+Running INTERNAL RadixClient
+Elapsed time: 0.842018 seconds
+Comparing results... 
+List 0 FAIL
+List 1 PASS
+List 2 PASS
+List 3 PASS
+
+            Advanced:    8/14    57.0%
+
+Numbers: 1,000 Lists: 1 Cores: 12 Resends: FALSE Lasts: TRUE
+Generating 1,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00642811 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+TIMEOUT after 30 seconds!
+Numbers: 1,000 Lists: 2 Cores: 12 Resends: FALSE Lasts: TRUE
+Generating 2,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00525764 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+TIMEOUT after 30 seconds!
+Numbers: 1,000 Lists: 4 Cores: 12 Resends: FALSE Lasts: TRUE
+Generating 4,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00946992 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+TIMEOUT after 30 seconds!
+
+             Stretch:    0/14     0.0%
+
+Numbers: 1,000 Lists: 1 Cores: 12 Resends: TRUE Lasts: TRUE
+Generating 1,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00650709 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+TIMEOUT after 30 seconds!
+Numbers: 1,000 Lists: 2 Cores: 12 Resends: TRUE Lasts: TRUE
+Generating 2,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00674635 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+TIMEOUT after 30 seconds!
+Numbers: 1,000 Lists: 4 Cores: 12 Resends: TRUE Lasts: TRUE
+Generating 4,000 random numbers... 
+Generating expected results... 
+Generate time: 0.00711494 seconds
+CruzID: nboothro
+Running INTERNAL RadixServer on port 11150 with 12 cores
+Running STUDENT  RadixClient
+TIMEOUT after 30 seconds!
+
+             Extreme:    0/14     0.0%
+

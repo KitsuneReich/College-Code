@@ -1,0 +1,30 @@
+//---------------------------------------------------------------------------------
+// PA 4: Read and Store Graph Representation
+// CMPS 101 Fall 2011 University of California Santa Cruz
+// 
+// Boothroyd, Nichole
+// nboothro
+//
+// Language:    C
+// 
+// Description: This program reads an input file, holding the number of vertices,
+//              representations of edges between vertices, and a terminating value
+//              and then creates an adjacency list representation of the graph
+//              using a custom graph ADT before printing the adjacency list to an
+//              output file. 
+//
+// Usage:       make
+//	        ./FindPath <input file> <output file> 
+//
+//---------------------------------------------------------------------------------
+
+List.c       	List ADT
+List.h		Header file for List ADT
+Graph.c		Graph ADT
+Graph.h		Header file for Graph ADT
+GraphTest.c	Test client for Graph ADT
+FindPath.c	Client program using Graph ADT
+Makefile        Provided makefile from class webpage
+README          Documentation file
+
+Comments:
